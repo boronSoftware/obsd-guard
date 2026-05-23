@@ -1,0 +1,35 @@
+[package]
+name = "obsd-guard"
+authors = ["Angelo DeLuca <angelo@boron.software>"]
+description = "A misuse-resistant API for the pledge/unveil syscalls on OpenBSD."
+version = "0.0.1"
+edition = "2024"
+repository = "https://github.com/boronSoftware/obsd-guard"
+license = "MIT"
+readme = "README.md"
+categories = ["api-bindings", "security"]
+keywords = ["openbsd", "pledge", "unveil"]
+rust-version = "1.85.0"
+
+[package.metadata.docs.rs]
+default-target = "x86_64-unknown-openbsd"
+targets = ["x86_64-unknown-openbsd", "aarch64-unknown-openbsd"]
+features = ["pledge_latest"]
+
+[features]
+# Select the pledge version feature that is less than or equal to the targeted version of OpenBSD.
+pledge_latest = ["pledge_6_8"]
+_pledge = []
+pledge_5_9 = ["_pledge"]
+pledge_6_0 = ["pledge_5_9"]
+pledge_6_1 = ["pledge_6_0"]
+pledge_6_3 = ["pledge_6_1"]
+pledge_6_4 = ["pledge_6_3"]
+pledge_6_5 = ["pledge_6_4"]
+pledge_6_8 = ["pledge_6_5"]
+
+[dependencies]
+libc = "0.2.185"
+
+[dev-dependencies]
+tempfile = "3.27.0"
