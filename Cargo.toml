@@ -2,7 +2,7 @@
 name = "obsd-guard"
 authors = ["Angelo DeLuca <angelo@boron.software>"]
 description = "A misuse-resistant API for the pledge/unveil syscalls on OpenBSD."
-version = "0.0.1"
+version = "0.1.0"
 edition = "2024"
 repository = "https://github.com/boronSoftware/obsd-guard"
 license = "MIT"
