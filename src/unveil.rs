@@ -224,13 +224,13 @@ impl UnveilBuilder {
 ///         .expect("Sandbox initialization failed.");
 /// }
 /// ```
-pub fn with_unveil<F>(f: F) -> crate::error::Result<()>
+pub fn with_unveil<F, T>(f: F) -> crate::error::Result<T>
 where
-    F: FnOnce(&mut UnveilBuilder) -> crate::error::Result<()>,
+    F: FnOnce(&mut UnveilBuilder) -> crate::error::Result<T>,
 {
     let mut builder = UnveilBuilder { _private: () };
-    f(&mut builder)?;
-    builder.finalize()
+    let r = f(&mut builder)?;
+    builder.finalize().map(|()| r)
 }
 
 #[cfg(test)]
